@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
+    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+    <title>eBPF-Firewall</title>
+    <style>
+        #my-chart .column {
+        --color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    </header>
+    
+    <main>
+        <!-- column graph -->
+        <div id="my-chart" hx-get="/update-graph" hx-trigger="every 0.5s" hx-target="tbody" hx-swap="beforeend">
+            <table class="charts-css column show-heading data-spacing-15 hide-data">
+        
+                <caption> The Chart Heading </caption>
+              
+                <thead>
+                  <tr>
+                    <th scope="col"> Year </th>
+                    <th scope="col"> Value </th>
+                  </tr>
+                </thead>
+              
+                <tbody hx-get="/update-graph" hx-trigger="every 0.5s" hx-target="find tr" hx-swap="delete">
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td style="--size: calc( 0 / 100 );"></td>
+                  </tr>
+                </tbody>
+              
+              </table>
+              
+        </div>
+    </main>
+
+    <!-- <footer>
+        Powered by 
+        <a id="htmx-link" href="https://htmx.org/">HTMX</a>
+        +
+        <a id="go-link" href="https://go.dev/">GO</a>
+        +
+        <a id="sqlite-link" href="https://sqlite.org/">SQLite</a>
+    </footer> -->
+
+</body>
+</html>
