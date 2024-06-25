@@ -19,7 +19,7 @@ func randFloats(min, max float64) float64 {
 
 // later implement caching of all the templates
 func getRoot(w http.ResponseWriter, r *http.Request) {
-	ts, err := template.ParseFiles("./ui/root.html")
+	ts, err := template.ParseFiles("./basic/root.html")
 	if err != nil {
 		log.Print(err)
 	}
@@ -32,7 +32,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 
 func getUpdateGraph(w http.ResponseWriter, r *http.Request) {
 	colSize := randFloats(0, 1)
-	ts, err := template.ParseFiles("./ui/graph.html")
+	ts, err := template.ParseFiles("./basic/graph.html")
 	if err != nil {
 		log.Print(err)
 	}
