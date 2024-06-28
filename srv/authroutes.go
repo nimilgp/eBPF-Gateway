@@ -82,6 +82,13 @@ func (app *application) postAccountSignIn(w http.ResponseWriter, r *http.Request
 	}
 
 	if match {
+		if err := app.queries.DeleteBearerToken(app.ctx, acc.UserName); err != nil {
+			log.Printf("<INFO>\t\t[(Sign-in)failed to invalidate bearer token]\n%s\n\n", err)
+			return
+		} else {
+			log.Printf("<INFO>\t\t[(Sign-in)succesfully invalidated bearer tokens]\nuser name: %s\n\n", acc.UserName)
+		}
+		app.generateBearerToken(w, accStruct)
 		log.Printf("<INFO>\t\t[(Sign-in)succesfull sign-in]\nuser name: %s\n\n", acc.UserName)
 		return
 	} else {

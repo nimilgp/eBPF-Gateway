@@ -33,11 +33,11 @@ func (q *Queries) CreateBearerToken(ctx context.Context, arg CreateBearerTokenPa
 const deleteBearerToken = `-- name: DeleteBearerToken :exec
 UPDATE BearerTokens
 SET valid = False
-WHERE tokenString = $1 AND valid = True
+WHERE userName = $1 AND valid = True
 `
 
-func (q *Queries) DeleteBearerToken(ctx context.Context, tokenstring string) error {
-	_, err := q.db.Exec(ctx, deleteBearerToken, tokenstring)
+func (q *Queries) DeleteBearerToken(ctx context.Context, username string) error {
+	_, err := q.db.Exec(ctx, deleteBearerToken, username)
 	return err
 }
 

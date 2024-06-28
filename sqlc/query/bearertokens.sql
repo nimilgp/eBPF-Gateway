@@ -12,7 +12,7 @@ WHERE tokenString = $1 AND valid = True;
 -- name: DeleteBearerToken :exec
 UPDATE BearerTokens
 SET valid = False
-WHERE tokenString = $1 AND valid = True;
+WHERE userName = $1 AND valid = True;
 
 -- name: UpdateBearerTokenExpiration :exec
 UPDATE BearerTokens
