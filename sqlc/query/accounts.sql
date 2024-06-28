@@ -1,8 +1,8 @@
 -- name: CreateAccount :exec
 INSERT INTO Accounts (
-    userName, passwdHash, powerLevel, firstName, lastName 
+    userName, passwdHash, powerLevel, firstName, lastName, email
 ) VALUES (
-    $1, $2, $3, $4, $5
+    $1, $2, $3, $4, $5, $6
 );
 
 -- name: RetrieveAccount :one

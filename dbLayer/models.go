@@ -11,9 +11,10 @@ import (
 type Account struct {
 	Username   string
 	Passwdhash string
-	Powerlevel pgtype.Int4
+	Powerlevel int32
 	Firstname  string
 	Lastname   string
+	Email      string
 	Valid      pgtype.Bool
 }
 

@@ -7,24 +7,23 @@ package dbLayer
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const createAccount = `-- name: CreateAccount :exec
 INSERT INTO Accounts (
-    userName, passwdHash, powerLevel, firstName, lastName 
+    userName, passwdHash, powerLevel, firstName, lastName, email
 ) VALUES (
-    $1, $2, $3, $4, $5
+    $1, $2, $3, $4, $5, $6
 )
 `
 
 type CreateAccountParams struct {
 	Username   string
 	Passwdhash string
-	Powerlevel pgtype.Int4
+	Powerlevel int32
 	Firstname  string
 	Lastname   string
+	Email      string
 }
 
 func (q *Queries) CreateAccount(ctx context.Context, arg CreateAccountParams) error {
@@ -34,6 +33,7 @@ func (q *Queries) CreateAccount(ctx context.Context, arg CreateAccountParams) er
 		arg.Powerlevel,
 		arg.Firstname,
 		arg.Lastname,
+		arg.Email,
 	)
 	return err
 }
@@ -50,7 +50,7 @@ func (q *Queries) DeleteAccount(ctx context.Context, username string) error {
 }
 
 const retrieveAccount = `-- name: RetrieveAccount :one
-SELECT username, passwdhash, powerlevel, firstname, lastname, valid FROM Accounts
+SELECT username, passwdhash, powerlevel, firstname, lastname, email, valid FROM Accounts
 WHERE userName = $1 AND valid = True
 `
 
@@ -63,6 +63,7 @@ func (q *Queries) RetrieveAccount(ctx context.Context, username string) (Account
 		&i.Powerlevel,
 		&i.Firstname,
 		&i.Lastname,
+		&i.Email,
 		&i.Valid,
 	)
 	return i, err
@@ -76,7 +77,7 @@ WHERE userName = $1 AND valid = True
 
 type UpdateAccountPowerLevelParams struct {
 	Username   string
-	Powerlevel pgtype.Int4
+	Powerlevel int32
 }
 
 func (q *Queries) UpdateAccountPowerLevel(ctx context.Context, arg UpdateAccountPowerLevelParams) error {
