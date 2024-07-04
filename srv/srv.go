@@ -44,6 +44,7 @@ func main() {
 	mux.HandleFunc("GET /{$}", getRoot)
 	mux.HandleFunc("POST /account/sign-up", app.postAccountSignUp)
 	mux.HandleFunc("POST /account/sign-in", app.postAccountSignIn)
+	mux.HandleFunc("GET /hardware/memory-ussage", app.getHardwareMemoryUssage)
 
 	handler := cors.Default().Handler(mux) //remove when in production
 	if err := http.ListenAndServe(app.port, handler); err != nil {
