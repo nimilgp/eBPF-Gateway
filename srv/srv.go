@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/jackc/pgx/v5"
+	"github.com/rs/cors"
 )
 
 type application struct {
@@ -35,15 +36,17 @@ func main() {
 	app.ctx = ctx
 	app.queries = queries
 	app.validate = validate
-	app.port = ":3333"
+	app.port = "0.0.0.0:3333"
 	log.Printf("<INFO>\t\t[server port on %s]\n\n", app.port)
 
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("GET /{$}", getRoot)
 	mux.HandleFunc("POST /account/sign-up", app.postAccountSignUp)
 	mux.HandleFunc("POST /account/sign-in", app.postAccountSignIn)
 
-	if err := http.ListenAndServe(app.port, mux); err != nil {
+	handler := cors.Default().Handler(mux) //remove when in production
+	if err := http.ListenAndServe(app.port, handler); err != nil {
 		log.Fatalf("<FATAL>\t\t[unable to listen and serve]\n%s\n\n", err)
 	}
 }
