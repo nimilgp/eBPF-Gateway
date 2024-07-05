@@ -35,10 +35,14 @@ func (app *application) getHardwareUssage(w http.ResponseWriter, r *http.Request
 	virtMem, err := mem.VirtualMemory()
 	if err != nil {
 		log.Printf("<ERROR>\t\t[(Hardware-Ussage) failed to get memory ussage]\n%s\n\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	cpuPerc, err := cpu.Percent(0, false)
 	if err != nil {
 		log.Printf("<ERROR>\t\t[(Hardware-Ussage) failed to get cpu ussage]\n%s\n\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	hardware := hardwareUssageStruct{
 		CpuPercUsed: cpuPerc[0],
