@@ -71,7 +71,7 @@ func (app *application) verifyAndUpdateBearerToken(tokenString string) bool {
 	} else {
 		log.Printf("<INFO>\t\t[(verify & update bearer token)bearer token has expired]\ntoken sting :%s\n\n", tokenString)
 		if err := app.queries.DeleteBearerToken(app.ctx, bearerToken.Username); err != nil {
-			log.Printf("<ERROR>\t\t[(verify & update bearer token)failed to delete beare token]\n%s\n\n", err)
+			log.Printf("<ERROR>\t\t[(verify & update bearer token)failed to delete bearer token]\n%s\n\n", err)
 		}
 		return false
 	}
