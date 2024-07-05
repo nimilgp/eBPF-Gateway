@@ -44,6 +44,7 @@ func main() {
 	mux.HandleFunc("GET /{$}", getRoot)
 	mux.HandleFunc("POST /account/sign-up", app.postAccountSignUp)
 	mux.HandleFunc("POST /account/sign-in", app.postAccountSignIn)
+	mux.HandleFunc("GET /hardware/ussage", app.getHardwareUssage)
 	mux.HandleFunc("GET /hardware/details", app.getHardwareDetails)
 
 	handler := cors.Default().Handler(mux) //remove when in production
