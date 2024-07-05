@@ -32,13 +32,22 @@ type hardwareUssageStruct struct {
 }
 
 func (app *application) getHardwareUssage(w http.ResponseWriter, r *http.Request) {
-	virtMem, _ := mem.VirtualMemory()
-	cpuPerc, _ := cpu.Percent(0, false)
+	virtMem, err := mem.VirtualMemory()
+	if err != nil {
+		log.Printf("<ERROR>\t\t[(Hardware-Ussage) failed to get memory ussage]\n%s\n\n", err)
+	}
+	cpuPerc, err := cpu.Percent(0, false)
+	if err != nil {
+		log.Printf("<ERROR>\t\t[(Hardware-Ussage) failed to get cpu ussage]\n%s\n\n", err)
+	}
 	hardware := hardwareUssageStruct{
 		CpuPercUsed: cpuPerc[0],
 		RamPercUsed: virtMem.UsedPercent,
 	}
 	temps, _ := sensors.SensorsTemperatures()
+	// if err != nil {
+	// 	log.Printf("<ERROR>\t\t[(Hardware-Ussage) failed to get cpu temp]\n%s\n\n", err)
+	// }
 	for i := 0; i < len(temps); i++ {
 		if temps[i].SensorKey == "coretemp_package_id_0" {
 			hardware.Temperature = temps[i].Temperature
