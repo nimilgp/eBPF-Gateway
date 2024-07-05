@@ -52,7 +52,7 @@ func (app *application) verifyAndUpdateBearerToken(tokenString string) bool {
 		return false
 	}
 	curTime := time.Now()
-	if curTime.After(bearerToken.Validtill.Time) {
+	if curTime.Before(bearerToken.Validtill.Time) {
 		validTill := curTime.Add(time.Minute * 30)
 		timeStamp := pgtype.Timestamp{
 			Time:  validTill,
