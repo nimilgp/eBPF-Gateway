@@ -26,7 +26,7 @@ func (app *application) postAccountSignUp(w http.ResponseWriter, r *http.Request
 	}
 
 	if err := app.validate.Struct(acc); err != nil {
-		log.Printf("<ERROR>\t\t[(Sign-up)json fields failed to match struct requirements]\n%s\n\n", err)
+		log.Printf("<WARNING>\t\t[(Sign-up)json fields failed to match struct requirements]\n%s\n\n", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -105,7 +105,7 @@ func (app *application) postAccountSignIn(w http.ResponseWriter, r *http.Request
 		log.Printf("<INFO>\t\t[(Sign-in)succesfull sign-in]\nuser name: %s\n\n", acc.UserName)
 		return
 	} else {
-		log.Printf("<WARNING>\t\t[(Sign-in)failed sign-in]\nuser name: %s\n\n", acc.UserName)
+		log.Printf("<WARNING>\t\t[(Sign-in)password does not match]\nuser name: %s\n\n", acc.UserName)
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}

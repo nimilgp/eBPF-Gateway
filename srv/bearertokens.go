@@ -48,7 +48,7 @@ func (app *application) generateBearerToken(w http.ResponseWriter, acc dbLayer.A
 func (app *application) verifyAndUpdateBearerToken(tokenString string) bool {
 	bearerToken, err := app.queries.RetrieveBearerToken(app.ctx, tokenString)
 	if err != nil {
-		log.Printf("<ERROR>\t\t[(verify & update bearer token)failed to retrieve bearer token]\n%s\n\n", err)
+		log.Printf("<WARNING>\t\t[(verify & update bearer token)failed to retrieve bearer token]\n%s\n\n", err)
 		return false
 	}
 	curTime := time.Now()
