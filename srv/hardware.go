@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -11,19 +10,6 @@ import (
 	"github.com/shirou/gopsutil/v4/sensors"
 	"github.com/zcalusic/sysinfo"
 )
-
-func humanReadableBytes(bytes uint64) string {
-	switch {
-	case bytes < 1024:
-		return fmt.Sprintf("%f Bytes", float64(bytes))
-	case bytes < 1024*1024:
-		return fmt.Sprintf("%.2f KiB", float64(bytes)/1024)
-	case bytes < 1024*1024*1024:
-		return fmt.Sprintf("%.2f MiB", float64(bytes)/1024/1024)
-	default:
-		return fmt.Sprintf("%.2f GiB", float64(bytes)/1024/1024/1024)
-	}
-}
 
 type hardwareUssageStruct struct {
 	CpuPercUsed float64

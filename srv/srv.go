@@ -47,6 +47,7 @@ func main() {
 	mux.HandleFunc("GET /hardware/ussage", app.getHardwareUssage)
 	mux.HandleFunc("GET /hardware/details", app.getHardwareDetails)
 	mux.HandleFunc("POST /firewall/action", app.postFirewallAction)
+	mux.HandleFunc("GET /firewall/current-total-bandwith", app.getTotalBandwidthUssage)
 
 	handler := cors.Default().Handler(mux) //remove when in production
 	if err := http.ListenAndServe(app.port, handler); err != nil {
